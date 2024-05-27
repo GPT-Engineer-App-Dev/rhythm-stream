@@ -1,4 +1,5 @@
-import { Box, Container, Flex, Heading, IconButton, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, IconButton, Image, Text, VStack, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 
 const Index = () => {
@@ -34,6 +35,13 @@ const Index = () => {
             <Text fontSize="sm">Get pumped with these workout tunes.</Text>
           </Box>
         </Flex>
+      </Box>
+
+      {/* Create Playlist Button */}
+      <Box mb={8}>
+        <Link to="/create-playlist">
+          <Button colorScheme="teal">Create New Playlist</Button>
+        </Link>
       </Box>
 
       {/* Player Interface */}
