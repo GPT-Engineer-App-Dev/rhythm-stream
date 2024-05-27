@@ -1,8 +1,37 @@
+import { useState } from "react";
 import { Box, Container, Flex, Heading, IconButton, Image, Text, VStack, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
 
 const Index = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentSong, setCurrentSong] = useState({
+    title: "Song Title",
+    artist: "Artist",
+    src: "/path/to/song.mp3"
+  });
+
+  const audio = new Audio(currentSong.src);
+
+  const handlePlayPause = () => {
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleNext = () => {
+    // Logic to skip to the next song
+    console.log("Next song");
+  };
+
+  const handlePrevious = () => {
+    // Logic to go back to the previous song
+    console.log("Previous song");
+  };
+
   return (
     <Container maxW="container.xl" p={4}>
       {/* Navigation Bar */}
@@ -49,12 +78,12 @@ const Index = () => {
         <Flex justify="space-between" align="center">
           <Box>
             <Text fontWeight="bold">Now Playing</Text>
-            <Text fontSize="sm">Song Title - Artist</Text>
+            <Text fontSize="sm">{currentSong.title} - {currentSong.artist}</Text>
           </Box>
           <Flex align="center">
-            <IconButton aria-label="Previous" icon={<FaBackward />} mx={2} />
-            <IconButton aria-label="Play/Pause" icon={<FaPlay />} mx={2} />
-            <IconButton aria-label="Next" icon={<FaForward />} mx={2} />
+            <IconButton aria-label="Previous" icon={<FaBackward />} mx={2} onClick={handlePrevious} />
+            <IconButton aria-label="Play/Pause" icon={isPlaying ? <FaPause /> : <FaPlay />} mx={2} onClick={handlePlayPause} />
+            <IconButton aria-label="Next" icon={<FaForward />} mx={2} onClick={handleNext} />
           </Flex>
         </Flex>
       </Box>
